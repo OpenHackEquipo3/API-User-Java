@@ -1,0 +1,36 @@
+name: ci
+
+on:
+  push:
+    branches: [master, azure-container-registry]
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      -
+        name: Login to ACR
+        uses: docker/login-action@v1
+        with:
+          registry: openhack7l436t69acr.azurecr.io
+          username: 572087c0-1181-4f20-b4fa-7a85536c508c
+          password: GE7lxUb4lSjSHeJTjg5eBYucX_UyeiThF_
+          
+      - name: Lowercase repository name 
+        run: | 
+          echo "REPO=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV 
+      - name: Short the sha to 7 characters only 
+        id: vars 
+        run: echo ::set-output name=tag::$(echo ${GITHUB_SHA::7})
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./poi/web/
+          tags: openhack7l436t69acr.azurecr.io/devopsoh/api-poi:${{ steps.vars.outputs.tag}}
+          file: ./poi/web/Dockerfile
+          push: true
+          pull: true

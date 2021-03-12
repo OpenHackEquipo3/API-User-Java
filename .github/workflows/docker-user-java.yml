@@ -29,8 +29,8 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ./poi/web/
+          context: ./user-java/
           tags: openhack7l436t69acr.azurecr.io/devopsoh/api-user-java:${{ steps.vars.outputs.tag}}
-          file: ./poi/web/Dockerfile
+          file: ./user-java/Dockerfile
           push: true
           pull: true

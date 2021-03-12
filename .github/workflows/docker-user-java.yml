@@ -2,7 +2,7 @@ name: ci
 
 on:
   push:
-    branches: [master, azure-container-registry]
+    branches: [main, master, azure-container-registry]
 
 jobs:
   login:

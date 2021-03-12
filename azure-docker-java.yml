@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./poi/web/
-          tags: openhack7l436t69acr.azurecr.io/devopsoh/api-poi:${{ steps.vars.outputs.tag}}
+          tags: openhack7l436t69acr.azurecr.io/devopsoh/api-user-java:${{ steps.vars.outputs.tag}}
           file: ./poi/web/Dockerfile
           push: true
           pull: true
